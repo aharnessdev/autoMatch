@@ -1,26 +1,23 @@
 <!-- match.html -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Car Recommendations</title>
-  <style>
-    pre {
-      white-space: pre-wrap; /* Preserve whitespace and wrap lines */
-      word-wrap: break-word; /* Allow long words to be broken on wrap */
-    }
-  </style>
+  <!-- Tailwind CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <h1>Your Car Recommendations</h1>
-  <div id="recommendations"></div>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center p-4">
+  <h1 class="text-3xl font-bold text-gray-800 mt-8 mb-6">Your Car Recommendations</h1>
+  <div id="recommendations" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl"></div>
 
   <script>
     // Retrieve recommendations from localStorage
     const recommendationsString = localStorage.getItem('carRecommendations');
     console.log('Retrieved recommendations string:', recommendationsString);
   
-    // Display the recommendations
+    // Display recommendations
     const recommendationsDiv = document.getElementById('recommendations');
   
     try {
@@ -28,19 +25,90 @@
       const recommendationsJSON = JSON.parse(recommendationsString);
       console.log('Parsed recommendations JSON:', recommendationsJSON);
   
+      // Function to create a car card
+      function createCarCard(car, index) {
+        // Create card container
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col';
+  
+        // Card Title
+        const title = document.createElement('h2');
+        title.className = 'text-2xl font-semibold text-blue-600 mb-4';
+        title.textContent = `Recommendation ${index + 1}`;
+        card.appendChild(title);
+  
+        // Car Details List
+        const detailsList = document.createElement('ul');
+        detailsList.className = 'space-y-2 flex-1';
+  
+        // Define the order and labels of the car attributes
+        const attributes = [
+          { key: 'carMake', label: 'Make' },
+          { key: 'carModel', label: 'Model' },
+          { key: 'carYear', label: 'Year' },
+          { key: 'carMSRP', label: 'MSRP' },
+          { key: 'carMPG', label: 'MPG' },
+          { key: 'carTowingCapacity', label: 'Towing Capacity' },
+          { key: 'carDrivetrain', label: 'Drivetrain' },
+          { key: 'carEngineType', label: 'Engine Type' },
+          { key: 'carFuelType', label: 'Fuel Type' },
+          { key: 'carEngineCylinders', label: 'Engine Cylinders' },
+          { key: 'carType', label: 'Type' },
+          { key: 'carSeatingCapacity', label: 'Seating Capacity' },
+          { key: 'carTransmissionType', label: 'Transmission' }
+        ];
+  
+        attributes.forEach(attr => {
+          const li = document.createElement('li');
+          li.className = 'flex items-start gap-4'; // Use gap-4 for consistent spacing
+  
+          const label = document.createElement('span');
+          label.className = 'font-medium text-gray-700';
+          label.textContent = `${attr.label}: `; // Added space after colon
+  
+          let value = car[attr.key];
+          
+          // Format certain fields except for 'carMSRP'
+          if (attr.key === 'carMPG') {
+            value = `${value} MPG`;
+          } else if (attr.key === 'carTowingCapacity') {
+            value = value > 0 ? `${value.toLocaleString()} lbs` : 'N/A';
+          }
+  
+          // Handle undefined or null values for all attributes
+          if (value === undefined || value === null || value === "") {
+            value = 'N/A';
+          }
+  
+          const valueSpan = document.createElement('span');
+          valueSpan.className = 'text-gray-800 break-words'; // Removed 'ml-4' and added break-words
+          valueSpan.textContent = value;
+  
+          li.appendChild(label);
+          li.appendChild(valueSpan);
+          detailsList.appendChild(li);
+        });
+  
+        card.appendChild(detailsList);
+        return card;
+      }
+  
       // Check if it's an array
       if (Array.isArray(recommendationsJSON)) {
-        recommendationsJSON.forEach((car, index) => {
-          const carDiv = document.createElement('div');
-          carDiv.innerHTML = `<h2>Recommendation ${index + 1}</h2><pre>${JSON.stringify(car, null, 2)}</pre>`;
-          recommendationsDiv.appendChild(carDiv);
-        });
+        if (recommendationsJSON.length === 0) {
+          recommendationsDiv.innerHTML = '<p class="text-center text-gray-600">No recommendations available.</p>';
+        } else {
+          recommendationsJSON.forEach((car, index) => {
+            const carCard = createCarCard(car, index);
+            recommendationsDiv.appendChild(carCard);
+          });
+        }
       } else {
-        recommendationsDiv.innerHTML = '<pre>' + JSON.stringify(recommendationsJSON, null, 2) + '</pre>';
+        recommendationsDiv.innerHTML = '<p class="text-center text-gray-600">No recommendations available.</p>';
       }
     } catch (err) {
       console.error('Error parsing recommendations:', err);
-      recommendationsDiv.textContent = 'Failed to parse recommendations.';
+      recommendationsDiv.innerHTML = '<p class="text-center text-red-500">Failed to parse recommendations.</p>';
     }
   </script>
 </body>
