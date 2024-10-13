@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
         body {
+        
             font-family: 'Patrick Hand', cursive;
         }
     </style>
@@ -22,32 +23,39 @@
                     <div class="ml-12 flex space-x-8">
                         <!-- Home link to navigation.html -->
                         <a href="navigation.html" class="text-[#1a1a1a] text-[22px]">Home</a>
-                        <!-- New Search link to search.html -->
+                        <!-- New search link to search.html -->
                         <a href="search.html" class="text-[#1a1a1a] text-[22px] underline">New Search</a>
                         <!-- Favorites link to favorite.html -->
                         <a href="favorite.html" class="text-[#1a1a1a] text-[22px]">Favorites</a>
                     </div>
                 </div>
-                <!-- Sign Out button link to index.html -->
+                <!-- sign ut button links to index.html -->
                 <a href="index.html">
                     <button class="bg-[#1a1a1a] text-white text-[22px] px-4 py-3 rounded-lg border-4 border-[#1a1a1a]">Sign Out</button>
                 </a>
             </div>
         </nav>
-
+        <!--styling crap and header -->
         <main class="container mx-auto px-4 mt-8">
             <h1 class="text-center text-black text-[22px] mb-8">Please fill out our short questionnaire so our AI can match you to your next car!</h1>
-
             <form id="carPreferencesForm" class="max-w-2xl mx-auto">
                 <div class="grid grid-cols-2 gap-6">
                     <!-- Budget -->
                     <div class="flex items-center">
                         <label for="budget" class="w-1/3 text-black text-[22px]">Budget:</label>
                         <select id="budget" name="budget" class="w-2/3 bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]">
+                            <option value="">Select Price Range</option>
+                            <option value="$5,000 - $10,000">$5,000 - $10,000</option>
                             <option value="$10,000 - $20,000">$10,000 - $20,000</option>
                             <option value="$20,000 - $30,000">$20,000 - $30,000</option>
                             <option value="$30,000 - $40,000">$30,000 - $40,000</option>
-                            <option value="$40,000+">$40,000+</option>
+                            <option value="$40,000 - $50,000">$40,000 - $50,000</option>
+                            <option value="$50,000 - $60,000">$50,000 - $60,000</option>
+                            <option value="$60,000 - $70,000">$60,000 - $70,000</option>
+                            <option value="$70,000 - $80,000">$70,000 - $80,000</option>
+                            <option value="$80,000 - $90,000">$80,000 - $90,000</option>
+                            <option value="$90,000 - $100,000">$90,000 - $100,000</option>
+                            <option value="$100,000+">$100,000+</option>                            
                         </select>
                     </div>
 
@@ -72,10 +80,11 @@
 
                     <!-- Transmission -->
                     <div class="flex items-center">
-                        <label class="w-1/3 text-black text-[22px]">Manual or Automatic?</label>
+                        <label class="w-1/3 text-black text-[22px]">Transmission type?</label>
                         <div class="w-2/3 flex space-x-2">
                             <button type="button" class="option-button" data-field="transmission" data-value="Manual">Manual</button>
                             <button type="button" class="option-button" data-field="transmission" data-value="Automatic">Automatic</button>
+                            <button type="button" class="option-button" data-field="transmission" data-value="CVT">CVT</button>
                         </div>
                     </div>
 
@@ -112,6 +121,19 @@
                             <option value="Truck">Truck</option>
                             <option value="Coupe">Coupe</option>
                             <option value="Van">Van</option>
+                            <option value="Convertible">Convertible</option>
+                            <option value="Hatchback">Hatchback</option>
+                            <option value="Wagon">Wagon</option>
+                            <option value="Crossover">Crossover</option>
+                            <option value="Minivan">Minivan</option>
+                            <option value="Roadster">Roadster</option>
+                            <option value="Pickup">Pickup</option>
+                            <option value="Sportback">Sportback</option>
+                            <option value="Liftback">Liftback</option>
+                            <option value="Cabriolet">Cabriolet</option>
+                            <option value="Supercar">Supercar</option>
+                            <option value="Microcar">Microcar</option>
+                            <option value="Off-Road Vehicle">Off-Road Vehicle</option>                            
                         </select>
                     </div>
 
@@ -119,9 +141,12 @@
                     <div class="flex items-center">
                         <label class="w-1/3 text-black text-[22px]">MPG Preference?</label>
                         <div class="w-2/3 flex space-x-2">
-                            <button type="button" class="option-button" data-field="mpg" data-value=">20">>20</button>
-                            <button type="button" class="option-button" data-field="mpg" data-value="30">30</button>
-                            <button type="button" class="option-button" data-field="mpg" data-value="<40"><40</button>
+                            <button type="button" class="option-button" data-field="mpg" data-value=">10">>10</button>
+                            <button type="button" class="option-button" data-field="mpg" data-value="10-20">10-20</button>
+                            <button type="button" class="option-button" data-field="mpg" data-value="20-30">20-30</button>
+                            <button type="button" class="option-button" data-field="mpg" data-value="30-40">30-40</button>
+                            <button type="button" class="option-button" data-field="mpg" data-value="40-50">40-50</button>
+                            <button type="button" class="option-button" data-field="mpg" data-value="<50"><50</button>                            
                         </div>
                     </div>
 
@@ -130,15 +155,76 @@
                         <label for="make_preference" class="w-1/3 text-black text-[22px]">Make Preference?</label>
                         <select id="make_preference" name="make_preference" class="w-2/3 bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]">
                             <option value="">Select Make</option>
-                            <option value="Toyota">Toyota</option>
-                            <option value="Honda">Honda</option>
-                            <option value="Ford">Ford</option>
-                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Acura">Acura</option>
+                            <option value="Alfa Romeo">Alfa Romeo</option>
+                            <option value="Aston Martin">Aston Martin</option>
+                            <option value="Audi">Audi</option>
                             <option value="BMW">BMW</option>
+                            <option value="Bentley Motors">Bentley Motors</option>
+                            <option value="Bollinger Motors">Bollinger Motors</option>
+                            <option value="Bugatti">Bugatti</option>
+                            <option value="Buick">Buick</option>
+                            <option value="Cadillac">Cadillac</option>
+                            <option value="Canoo">Canoo</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Chrysler">Chrysler</option>
+                            <option value="DeLorean Motor Company">DeLorean Motor Company</option>
+                            <option value="Dodge">Dodge</option>
+                            <option value="Ferrari">Ferrari</option>
+                            <option value="Fiat">Fiat</option>
+                            <option value="Fisker">Fisker</option>
+                            <option value="Ford">Ford</option>
+                            <option value="GMC">GMC</option>
+                            <option value="Genesis">Genesis</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Hummer">Hummer</option>
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="Ineos">Ineos</option>
+                            <option value="Infiniti">Infiniti</option>
+                            <option value="Jaguar">Jaguar</option>
+                            <option value="Jeep">Jeep</option>
+                            <option value="Karma">Karma</option>
+                            <option value="Kia">Kia</option>
+                            <option value="Lamborghini">Lamborghini</option>
+                            <option value="Land Rover">Land Rover</option>
+                            <option value="Lexus">Lexus</option>
+                            <option value="Lincoln">Lincoln</option>
+                            <option value="Lordstown Motors">Lordstown Motors</option>
+                            <option value="Lotus">Lotus</option>
+                            <option value="Lucid Motors">Lucid Motors</option>
+                            <option value="Maserati">Maserati</option>
+                            <option value="Maybach">Maybach</option>
+                            <option value="Mazda">Mazda</option>
+                            <option value="McLaren">McLaren</option>
+                            <option value="Mercedes-AMG">Mercedes-AMG</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="Mercury">Mercury</option>
+                            <option value="Mini">Mini</option>
+                            <option value="Mitsubishi">Mitsubishi</option>
+                            <option value="Nissan">Nissan</option>
+                            <option value="Oldsmobile">Oldsmobile</option>
+                            <option value="Polestar">Polestar</option>
+                            <option value="Pontiac">Pontiac</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="Plymouth">Plymouth</option>
+                            <option value="Ram">Ram</option>
+                            <option value="Rivian">Rivian</option>
+                            <option value="Rolls-Royce">Rolls-Royce</option>
+                            <option value="Saab">Saab</option>
+                            <option value="Saturn">Saturn</option>
+                            <option value="Scion">Scion</option>
+                            <option value="Smart">Smart</option>
+                            <option value="Subaru">Subaru</option>
+                            <option value="Suzuki">Suzuki</option>
+                            <option value="Tesla">Tesla</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Volkswagen">Volkswagen</option>
+                            <option value="VinFast">VinFast</option>
+                            <option value="Volvo">Volvo</option>                            
                         </select>
                     </div>
                 </div>
-
+                <!--submit button and styling-->
                 <div class="mt-8 flex justify-center">
                     <button type="submit" id="match" class="bg-white border-2 border-[#1a1a1a] rounded-lg px-6 py-3 text-[22px] flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -152,19 +238,19 @@
     </div>
 
     <script type="module">
-        // Object to store selected options
+        // Object to store user selected options
         const selectedOptions = {};
 
-        // Add event listeners to option buttons
+        // event listeners for the option buttons
         document.querySelectorAll('.option-button').forEach(button => {
             button.addEventListener('click', () => {
                 const field = button.getAttribute('data-field');
                 const value = button.getAttribute('data-value');
 
-                // Store the selected value
+                // Store the selected option value
                 selectedOptions[field] = value;
 
-                // Update button styles
+                // Update button styles, this doesn't really work rn because I got rid of a bunch of styling. will fix later sry
                 document.querySelectorAll(`.option-button[data-field="${field}"]`).forEach(btn => {
                     btn.classList.remove('bg-[#1a1a1a]', 'text-white');
                     btn.classList.add('bg-white', 'text-black');
@@ -181,42 +267,42 @@
             const formData = new FormData(document.getElementById('carPreferencesForm'));
             const userPreferences = {};
 
-            // Collect data from form inputs
+            // Collect data from inputs
             formData.forEach((value, key) => {
                 userPreferences[key] = value;
             });
 
-            // Add selected options from buttons
+            // add selected options 
             Object.assign(userPreferences, selectedOptions);
 
-            // Send data to the backend
+            // Send data to backend
             // After receiving the response from the backend
             fetch('http://localhost:3000/api/getCarRecommendations', {
-          method: 'POST',
-          headers: {
+            method: 'POST',
+            headers: {
             'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userPreferences),
-        })
-          .then((response) => {
-            if (!response.ok) {
-              return response.json().then((err) => {
+             },
+             body: JSON.stringify(userPreferences),
+            })
+                .then((response) => {
+                 if (!response.ok) {
+                return response.json().then((err) => {
                 throw new Error(err.error || 'Unknown error');
               });
             }
             return response.json();
-          })
-          .then((data) => {
+             })
+            .then((data) => {
             console.log('Data received from backend:', data);
 
-            // Stringify recommendations before storing
+            // stringify recommendations 
             const recommendationsString = JSON.stringify(data.recommendations);
             console.log('Stringified recommendations:', recommendationsString);
 
-            // Store the recommendations for display on match.html
+            // store the recommendations for display on match.html
             localStorage.setItem('carRecommendations', recommendationsString);
 
-            // Redirect to the match results page
+            // Redirecr to match.html 
             window.location.href = 'match.html';
           })
           .catch((error) => {
