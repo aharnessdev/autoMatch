@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AutoMatch - New Search</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Patrick Hand', cursive;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div class="w-full max-w-[1440px] mx-auto relative bg-white">
+        <nav class="w-full h-20 bg-white shadow">
+            <div class="container mx-auto px-4 h-full flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="w-[122px] h-[43px] bg-white rounded-sm border-2 border-[#1a1a1a] flex items-center justify-center">
+                        <img src="https://via.placeholder.com/100x30?text=AutoMatch" alt="AutoMatch Logo" class="max-w-full max-h-full">
+                    </div>
+                    <div class="ml-12 flex space-x-8">
+                        <!-- Home link to navigation.html -->
+                        <a href="navigation.html" class="text-[#1a1a1a] text-[22px]">Home</a>
+                        <!-- New Search link to search.html -->
+                        <a href="search.html" class="text-[#1a1a1a] text-[22px] underline">New Search</a>
+                        <!-- Favorites link to favorite.html -->
+                        <a href="favorite.html" class="text-[#1a1a1a] text-[22px]">Favorites</a>
+                    </div>
+                </div>
+                <!-- Sign Out button link to index.html -->
+                <a href="index.html">
+                    <button class="bg-[#1a1a1a] text-white text-[22px] px-4 py-3 rounded-lg border-4 border-[#1a1a1a]">Sign Out</button>
+                </a>
+            </div>
+        </nav>
+
+        <main class="container mx-auto px-4 mt-8">
+            <h1 class="text-center text-black text-[22px] mb-8">Please fill out our short questionnaire so our AI can match you to your next car!</h1>
+
+            <form id="carPreferencesForm" class="max-w-2xl mx-auto">
+                <div class="grid grid-cols-2 gap-6">
+                    <!-- Budget -->
+                    <div class="flex items-center">
+                        <label for="budget" class="w-1/3 text-black text-[22px]">Budget:</label>
+                        <select id="budget" name="budget" class="w-2/3 bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]">
+                            <option value="$10,000 - $20,000">$10,000 - $20,000</option>
+                            <option value="$20,000 - $30,000">$20,000 - $30,000</option>
+                            <option value="$30,000 - $40,000">$30,000 - $40,000</option>
+                            <option value="$40,000+">$40,000+</option>
+                        </select>
+                    </div>
+
+                    <!-- New or Used -->
+                    <div class="flex items-center">
+                        <label class="w-1/3 text-black text-[22px]">New or used?</label>
+                        <div class="w-2/3 flex space-x-2">
+                            <button type="button" class="option-button" data-field="new_used" data-value="New">New</button>
+                            <button type="button" class="option-button" data-field="new_used" data-value="Used">Used</button>
+                        </div>
+                    </div>
+
+                    <!-- Fuel Type -->
+                    <div class="flex items-center">
+                        <label class="w-1/3 text-black text-[22px]">Gas, electric, or hybrid?</label>
+                        <div class="w-2/3 flex space-x-2">
+                            <button type="button" class="option-button" data-field="fuel_type" data-value="Gas">Gas</button>
+                            <button type="button" class="option-button" data-field="fuel_type" data-value="Electric">Electric</button>
+                            <button type="button" class="option-button" data-field="fuel_type" data-value="Hybrid">Hybrid</button>
+                        </div>
+                    </div>
+
+                    <!-- Transmission -->
+                    <div class="flex items-center">
+                        <label class="w-1/3 text-black text-[22px]">Manual or Automatic?</label>
+                        <div class="w-2/3 flex space-x-2">
+                            <button type="button" class="option-button" data-field="transmission" data-value="Manual">Manual</button>
+                            <button type="button" class="option-button" data-field="transmission" data-value="Automatic">Automatic</button>
+                        </div>
+                    </div>
+
+                    <!-- Passengers -->
+                    <div class="flex items-center">
+                        <label class="w-1/3 text-black text-[22px]"># of Passengers?</label>
+                        <div class="w-2/3 flex space-x-2">
+                            <button type="button" class="option-button" data-field="passengers" data-value="1">1</button>
+                            <button type="button" class="option-button" data-field="passengers" data-value="2">2</button>
+                            <button type="button" class="option-button" data-field="passengers" data-value="3">3</button>
+                            <button type="button" class="option-button" data-field="passengers" data-value="4">4</button>
+                            <button type="button" class="option-button" data-field="passengers" data-value="5+">5+</button>
+                        </div>
+                    </div>
+
+                    <!-- Drivetrain -->
+                    <div class="flex items-center">
+                        <label class="w-1/3 text-black text-[22px]">AWD, 4WD, FWD, or RWD?</label>
+                        <div class="w-2/3 flex space-x-2">
+                            <button type="button" class="option-button" data-field="drivetrain" data-value="AWD">AWD</button>
+                            <button type="button" class="option-button" data-field="drivetrain" data-value="4WD">4WD</button>
+                            <button type="button" class="option-button" data-field="drivetrain" data-value="FWD">FWD</button>
+                            <button type="button" class="option-button" data-field="drivetrain" data-value="RWD">RWD</button>
+                        </div>
+                    </div>
+
+                    <!-- Body Style -->
+                    <div class="flex items-center">
+                        <label for="body_style" class="w-1/3 text-black text-[22px]">Body Style?</label>
+                        <select id="body_style" name="body_style" class="w-2/3 bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]">
+                            <option value="">Select Style</option>
+                            <option value="Sedan">Sedan</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Truck">Truck</option>
+                            <option value="Coupe">Coupe</option>
+                            <option value="Van">Van</option>
+                        </select>
+                    </div>
+
+                    <!-- MPG Preference -->
+                    <div class="flex items-center">
+                        <label class="w-1/3 text-black text-[22px]">MPG Preference?</label>
+                        <div class="w-2/3 flex space-x-2">
+                            <button type="button" class="option-button" data-field="mpg" data-value=">20">>20</button>
+                            <button type="button" class="option-button" data-field="mpg" data-value="30">30</button>
+                            <button type="button" class="option-button" data-field="mpg" data-value="<40"><40</button>
+                        </div>
+                    </div>
+
+                    <!-- Make Preference -->
+                    <div class="flex items-center">
+                        <label for="make_preference" class="w-1/3 text-black text-[22px]">Make Preference?</label>
+                        <select id="make_preference" name="make_preference" class="w-2/3 bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]">
+                            <option value="">Select Make</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Ford">Ford</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="BMW">BMW</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-center">
+                    <button type="submit" id="match" class="bg-white border-2 border-[#1a1a1a] rounded-lg px-6 py-3 text-[22px] flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        Find your AutoMatch!
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script type="module">
+        // Object to store selected options
+        const selectedOptions = {};
+
+        // Add event listeners to option buttons
+        document.querySelectorAll('.option-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const field = button.getAttribute('data-field');
+                const value = button.getAttribute('data-value');
+
+                // Store the selected value
+                selectedOptions[field] = value;
+
+                // Update button styles
+                document.querySelectorAll(`.option-button[data-field="${field}"]`).forEach(btn => {
+                    btn.classList.remove('bg-[#1a1a1a]', 'text-white');
+                    btn.classList.add('bg-white', 'text-black');
+                });
+                button.classList.add('bg-[#1a1a1a]', 'text-white');
+                button.classList.remove('bg-white', 'text-black');
+            });
+        });
+
+        // Handle form submission
+        document.getElementById('match').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(document.getElementById('carPreferencesForm'));
+            const userPreferences = {};
+
+            // Collect data from form inputs
+            formData.forEach((value, key) => {
+                userPreferences[key] = value;
+            });
+
+            // Add selected options from buttons
+            Object.assign(userPreferences, selectedOptions);
+
+            // Send data to the backend
+            // After receiving the response from the backend
+            fetch('http://localhost:3000/api/getCarRecommendations', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userPreferences),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              return response.json().then((err) => {
+                throw new Error(err.error || 'Unknown error');
+              });
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log('Data received from backend:', data);
+
+            // Stringify recommendations before storing
+            const recommendationsString = JSON.stringify(data.recommendations);
+            console.log('Stringified recommendations:', recommendationsString);
+
+            // Store the recommendations for display on match.html
+            localStorage.setItem('carRecommendations', recommendationsString);
+
+            // Redirect to the match results page
+            window.location.href = 'match.html';
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            alert('An error occurred while generating recommendations. Please try again later.');
+          });
+      });
+    </script>
+</body>
+</html>

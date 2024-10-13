@@ -1,0 +1,47 @@
+<!-- match.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Car Recommendations</title>
+  <style>
+    pre {
+      white-space: pre-wrap; /* Preserve whitespace and wrap lines */
+      word-wrap: break-word; /* Allow long words to be broken on wrap */
+    }
+  </style>
+</head>
+<body>
+  <h1>Your Car Recommendations</h1>
+  <div id="recommendations"></div>
+
+  <script>
+    // Retrieve recommendations from localStorage
+    const recommendationsString = localStorage.getItem('carRecommendations');
+    console.log('Retrieved recommendations string:', recommendationsString);
+  
+    // Display the recommendations
+    const recommendationsDiv = document.getElementById('recommendations');
+  
+    try {
+      // Parse the recommendations as JSON
+      const recommendationsJSON = JSON.parse(recommendationsString);
+      console.log('Parsed recommendations JSON:', recommendationsJSON);
+  
+      // Check if it's an array
+      if (Array.isArray(recommendationsJSON)) {
+        recommendationsJSON.forEach((car, index) => {
+          const carDiv = document.createElement('div');
+          carDiv.innerHTML = `<h2>Recommendation ${index + 1}</h2><pre>${JSON.stringify(car, null, 2)}</pre>`;
+          recommendationsDiv.appendChild(carDiv);
+        });
+      } else {
+        recommendationsDiv.innerHTML = '<pre>' + JSON.stringify(recommendationsJSON, null, 2) + '</pre>';
+      }
+    } catch (err) {
+      console.error('Error parsing recommendations:', err);
+      recommendationsDiv.textContent = 'Failed to parse recommendations.';
+    }
+  </script>
+</body>
+</html>
