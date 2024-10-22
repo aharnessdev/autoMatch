@@ -17,33 +17,25 @@
     </style>
 </head>
 <body class="bg-white">
-    <div class="w-full max-w-[1440px] mx-auto relative bg-white">
-        <nav class="w-full h-20 bg-white shadow">
+    <div class="w-full relative bg-white">
+        <nav class="w-full h-20 bg-gradient-to-r from-[#bb4f17] to-black shadow">
             <div class="container mx-auto px-4 h-full flex items-center justify-between">
                 <div class="flex items-center">
-                    <div class="w-[122px] h-[43px] bg-white rounded-sm border-2 border-[#1a1a1a] flex items-center justify-center">
-                        <img src="https://via.placeholder.com/100x30?text=AutoMatch" alt="AutoMatch Logo" class="max-w-full max-h-full">
-                    </div>
+                    <img src="https://via.placeholder.com/189x80" alt="Logo" class="h-20">
                     <div class="ml-12 flex space-x-8">
-                        <!-- Home link to navigation.html -->
-                        <a href="navigation.html" class="text-[#1a1a1a] text-[22px]">Home</a>
-                        <!-- New search link to search.html -->
-                        <a href="search.html" class="text-[#1a1a1a] text-[22px] underline">New Search</a>
-                        <!-- Favorites link to favorite.html -->
-                        <a href="favorite.html" class="text-[#1a1a1a] text-[22px]">Favorites</a>
+                        <a href="nav.html" class="text-[#1b1a17] text-[22px] font-['Patrick Hand']">Home</a>
+                        <a href="#" class="text-[#1b1a17] text-[22px] font-['Patrick Hand']">New Search</a>
+                        <a href="favorites.html" class="text-[#1b1a17] text-[22px] font-['Patrick Hand']">Favorites</a>
                     </div>
                 </div>
-                <!-- sign out button links to index.html -->
-                <a href="index.html">
-                    <button class="bg-[#1a1a1a] text-white text-[22px] px-4 py-3 rounded-lg border-4 border-[#1a1a1a]">Sign Out</button>
-                </a>
+                <button class="bg-[#1a1a1a] text-white text-base px-4 py-3 rounded-lg border-4 border-[#1a1a1a]">Sign Out</button>
             </div>
         </nav>
         <!-- Styling and header -->
-        <main class="container mx-auto px-4 mt-8">
+        <main class="container mx-auto px-8 py-8 mt-8">
             <h1 class="text-center text-black text-[22px] mb-8">Please fill out our short questionnaire so our AI can match you to your next car!</h1>
             <form id="carPreferencesForm" class="max-w-2xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Budget -->
                     <div class="flex flex-col">
                         <label for="budget" class="text-black text-[22px] mb-2">Budget:</label>
@@ -159,43 +151,36 @@
                     <div class="flex flex-col">
                         <label for="make_preference" class="text-black text-[22px] mb-2">Make Preference?</label>
                         <select id="make_preference" name="make_preference[]" multiple class="w-full bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px] h-40 overflow-y-auto">
+                            <option value="Acura">Any/No Preference</option>
                             <option value="Acura">Acura</option>
                             <option value="Alfa Romeo">Alfa Romeo</option>
                             <option value="Aston Martin">Aston Martin</option>
                             <option value="Audi">Audi</option>
                             <option value="BMW">BMW</option>
                             <option value="Bentley Motors">Bentley Motors</option>
-                            <option value="Bollinger Motors">Bollinger Motors</option>
                             <option value="Bugatti">Bugatti</option>
                             <option value="Buick">Buick</option>
                             <option value="Cadillac">Cadillac</option>
-                            <option value="Canoo">Canoo</option>
                             <option value="Chevrolet">Chevrolet</option>
                             <option value="Chrysler">Chrysler</option>
-                            <option value="DeLorean Motor Company">DeLorean Motor Company</option>
                             <option value="Dodge">Dodge</option>
                             <option value="Ferrari">Ferrari</option>
                             <option value="Fiat">Fiat</option>
-                            <option value="Fisker">Fisker</option>
                             <option value="Ford">Ford</option>
                             <option value="GMC">GMC</option>
                             <option value="Genesis">Genesis</option>
                             <option value="Honda">Honda</option>
                             <option value="Hummer">Hummer</option>
                             <option value="Hyundai">Hyundai</option>
-                            <option value="Ineos">Ineos</option>
                             <option value="Infiniti">Infiniti</option>
                             <option value="Jaguar">Jaguar</option>
                             <option value="Jeep">Jeep</option>
-                            <option value="Karma">Karma</option>
                             <option value="Kia">Kia</option>
                             <option value="Lamborghini">Lamborghini</option>
                             <option value="Land Rover">Land Rover</option>
                             <option value="Lexus">Lexus</option>
                             <option value="Lincoln">Lincoln</option>
-                            <option value="Lordstown Motors">Lordstown Motors</option>
                             <option value="Lotus">Lotus</option>
-                            <option value="Lucid Motors">Lucid Motors</option>
                             <option value="Maserati">Maserati</option>
                             <option value="Maybach">Maybach</option>
                             <option value="Mazda">Mazda</option>
@@ -207,7 +192,6 @@
                             <option value="Mitsubishi">Mitsubishi</option>
                             <option value="Nissan">Nissan</option>
                             <option value="Oldsmobile">Oldsmobile</option>
-                            <option value="Polestar">Polestar</option>
                             <option value="Pontiac">Pontiac</option>
                             <option value="Porsche">Porsche</option>
                             <option value="Plymouth">Plymouth</option>
@@ -223,7 +207,6 @@
                             <option value="Tesla">Tesla</option>
                             <option value="Toyota">Toyota</option>
                             <option value="Volkswagen">Volkswagen</option>
-                            <option value="VinFast">VinFast</option>
                             <option value="Volvo">Volvo</option>                            
                         </select>
                     </div>

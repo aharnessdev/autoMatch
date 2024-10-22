@@ -89,7 +89,7 @@ app.post('/api/getCarRecommendations', async (req, res) => {
     const response = await axios.post(
       'http://localhost:11434/api/generate',
       {
-        model: 'llama3.2', // Ensure this matches your model name
+        model: 'llama3.2:latest', // Ensure this matches running model name
         prompt: prompt,
       },
       {

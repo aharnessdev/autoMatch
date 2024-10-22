@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoMatch Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+        <header class="p-4">
+            <nav class="flex items-center text-sm">
+                <a href="landing.html" class="font-semibold text-gray-900">Home</a>
+                <span class="mx-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </span>
+                <a href="login.html" class="font-semibold text-gray-900">Login</a>
+                <span class="mx-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <a href="#" class="font-semibold text-gray-900">Sign Up</a>
+                </span>
+            </nav>
+        </header>
+        
+        <img src="https://via.placeholder.com/176x125" alt="Automatch Logo" class="absolute top-0 right-0 w-44 h-auto">
+        <div class="container mx-auto max-w-7xl relative">
+        <main class="mt-16 flex flex-col items-center">
+            <h1 class="text-center text-5xl font-['Montserrat'] mb-12">Thank you for joining AutoMatch!</h1>
+        <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+            <form class="space-y-4">
+                <div class="flex space-x-4">
+                    <input type="text" placeholder="First Name" class="w-1/2 p-3 border-2 border-gray-800 rounded-lg">
+                    <input type="text" placeholder="Last Name" class="w-1/2 p-3 border-2 border-gray-800 rounded-lg">
+                </div>
+                <input type="email" placeholder="Email" class="w-full p-3 border-2 border-gray-800 rounded-lg">
+                <input type="text" placeholder="Username" class="w-full p-3 border-2 border-gray-800 rounded-lg">
+                <input type="password" placeholder="Password" class="w-full p-3 border-2 border-gray-800 rounded-lg">
+                <input type="password" placeholder="Confirm Password" class="w-full p-3 border-2 border-gray-800 rounded-lg">
+                <button type="submit" class="w-full p-3 bg-gray-800 text-white font-semibold rounded-lg">Sign Up</button>
+            </form>
+        </div>
+        </main>
+    </div>
+
+    <script type="module">
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Sign up successful!');
+        });
+    </script>
+</body>
+</html>
