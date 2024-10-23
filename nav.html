@@ -15,18 +15,17 @@
         }
     </style>
 </head>
-<body class="bg-white min-h-screen flex items-center justify-center">
- 
-        <div class="absolute right-4 top-4">
-            <a href="login.html">
-            <button class="bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg border-4 border-gray-900 hover:bg-gray-800 transition duration-300">
-                Sign Out
-            </button>
-        </a>
-        </div>
+
+<body class="bg-white min-h-screen flex flex-col">
+  
+    <div class="w-full relative bg-white">
+      <div id="navbar-placeholder"></div>
+
+    <div class="bg-white min-h-screen flex items-center justify-center">
+
         <div class="w-full max-w-[1440px] h-[1024px] relative bg-white p-4">
         <div class="flex flex-col items-center justify-center h-full space-y-8">
-            <img src="https://source.unsplash.com/random/569x352?technology" alt="Automatch Logo" class="w-[569px] h-[352px] object-cover rounded-lg shadow-lg mb-8">
+            <img src="logo.png" alt="Automatch Logo" class="w-[569px] h-[352px] object-cover rounded-lg shadow-md mb-8">
             
             <div class="flex items-center w-[416px]">
                 <div class="w-[50px] h-[50px] border border-gray-800 flex items-center justify-center mr-4">
@@ -57,7 +56,12 @@
     </div>
 
     <script type="module">
-        // Add any necessary JavaScript here
+        fetch('navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+    })
+    .catch(error => console.error('Error loading navbar:', error));
 
     </script>
 </body>

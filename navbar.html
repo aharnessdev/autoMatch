@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Head content remains the same -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Navbar</title>
+  
+  <!--navbar-->
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- CSS for Slide-in Effect -->
+  <style>
+    #mobile-menu {
+      transition: transform 0.3s ease-in-out;
+      transform: translateX(100%);
+    }
+    #mobile-menu.active {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="h-16 flex relative">
+    <!-- Left Half -->
+    <div class="w-1/2 flex items-center p-2">
+      <div class="w-20 h-14  flex items-center justify-center">
+        <!-- Placeholder for logo -->
+        <img src="logo.png" alt="Logo" class="object-cover w-full h-full">
+      </div>
+      <div class="hidden md:flex space-x-4 ml-4">
+        <a href="nav.html" class="text-black hover:text-gray-600 text-sm">Home</a>
+        <a href="search.html" class="text-black hover:text-gray-600 text-sm">New Search</a>
+        <a href="favorites.html" class="text-black hover:text-gray-600 text-sm">Favorites</a>
+      </div>
+    </div>
+    <!-- Right Half -->
+    <div class="w-1/2 h-full flex relative">
+      <!-- SVG Section -->
+      <div class="flex items-center">
+        <svg class="h-full w-auto mr-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 80" fill="none">
+          <!-- SVG content -->
+          <path d="M0 0 C13.86 0 27.72 0 42 0 C42 26.4 42 52.8 42 80 C30.8625 80.12375 30.8625 80.12375 19.5 80.25 C17.17130859 80.28641602 14.84261719 80.32283203 12.44335938 80.36035156 C10.57683227 80.37204501 8.71029488 80.38223528 6.84375 80.390625 C5.89145508 80.41108887 4.93916016 80.43155273 3.95800781 80.45263672 C-5.36422411 80.45746689 -11.05767179 77.34859379 -17.8125 71 C-18.31966553 70.52723633 -18.82683105 70.05447266 -19.34936523 69.56738281 C-22.96908415 66.13929938 -26.27340763 62.49157886 -29.5625 58.75 C-36.45922888 50.9587893 -44.95201337 44.51700441 -55.62109375 43.734375 C-56.88050781 43.73953125 -58.13992187 43.7446875 -59.4375 43.75 C-60.69433594 43.74484375 -61.95117188 43.7396875 -63.24609375 43.734375 C-67.17938665 44.01269333 -70.27032288 44.78725338 -74 46 C-73.65756815 40.52109038 -70.38791683 37.03470095 -67 33 C-66.24203125 32.07960938 -66.24203125 32.07960938 -65.46875 31.140625 C-58.67038444 23.60910237 -48.17072551 18.62017085 -38.109375 17.75 C-29.0100061 17.40500023 -20.4090503 18.76069774 -12.9375 24.25 C-8.51630929 26.88390085 -4.03220811 26.65373096 1 26 C4.30639085 24.79767605 5.70689866 23.48701496 7.3125 20.375 C9.4310017 15.761188 9.28408672 12.89558063 8 8 C5.65494204 4.36111695 3.52490822 2.64368117 0 0 Z " fill="#F8A940" transform="translate(88,0)"/>
+        </svg>
+      </div>
+      <!-- Gradient Background and Content Section -->
+      <div class="flex-1 h-full bg-gradient-to-r from-[#F8A940] to-red-600 flex items-center justify-end pr-4">
+        <!-- Sign Out Button -->
+        <div class="hidden md:block">
+          <button class="bg-black text-white px-3 py-1 rounded text-sm">Sign Out</button>
+        </div>
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden ml-2">
+          <button id="mobile-menu-button" class="text-white focus:outline-none">
+            <!-- Hamburger Menu Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <!-- Hamburger Menu Icon SVG Path -->
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden fixed inset-0 bg-white z-20 p-6">
+    <button id="close-menu-button" class="text-black focus:outline-none mb-4" aria-label="Close mobile menu">
+      <!-- Close Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Close Icon SVG Path -->
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <!-- Mobile Menu Links -->
+    <nav>
+      <a href="nav.html" class="text-black hover:text-gray-600 mb-4 block text-base">Home</a>
+      <a href="search.html" class="text-black hover:text-gray-600 mb-4 block text-base">New Search</a>
+      <a href="favorites.html" class="text-black hover:text-gray-600 mb-4 block text-base">Favorites</a>
+      <!-- Sign Out Button -->
+       <a href="index.html">
+      <button class="bg-black text-white px-4 py-2 rounded mt-4 text-base">Sign Out</button>
+    </a>
+    </nav>
+  </div>
+  <!-- JavaScript for Mobile Menu Toggle -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const closeButton = document.getElementById('close-menu-button');
+      
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+        document.body.classList.add('overflow-hidden');
+      });
+      
+      closeButton.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        document.body.classList.remove('overflow-hidden');
+      });
+    });
+  </script>
+</body>
+</html>
