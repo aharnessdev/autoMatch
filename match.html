@@ -6,110 +6,300 @@
   <meta charset="UTF-8">
   <title>Car Recommendations</title>
   <!-- Tailwind CSS CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center p-4">
-  <h1 class="text-3xl font-bold text-gray-800 mt-8 mb-6">Your Car Recommendations</h1>
-  <div id="recommendations" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl"></div>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+  <style>
+      body {
+          font-family: 'Inter', sans-serif;
+      }
+      .roboto-mono {
+          font-family: 'Roboto Mono', monospace;
+      }
 
-  <script>
-    // Retrieve recommendations from localStorage
-    const recommendationsString = localStorage.getItem('carRecommendations');
-    console.log('Retrieved recommendations string:', recommendationsString);
-  
-    // Display recommendations
-    const recommendationsDiv = document.getElementById('recommendations');
-  
-    try {
-      // Parse the recommendations as JSON
-      const recommendationsJSON = JSON.parse(recommendationsString);
-      console.log('Parsed recommendations JSON:', recommendationsJSON);
-  
-      // Function to create a car card
-      function createCarCard(car, index) {
-        // Create card container
-        const card = document.createElement('div');
-        card.className = 'bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col';
-  
-        // Card Title
-        const title = document.createElement('h2');
-        title.className = 'text-2xl font-semibold text-blue-600 mb-4';
-        title.textContent = `Recommendation ${index + 1}`;
-        card.appendChild(title);
-  
-        // Car Details List
-        const detailsList = document.createElement('ul');
-        detailsList.className = 'space-y-2 flex-1';
-  
-        // Define the order and labels of the car attributes
-        const attributes = [
-          { key: 'carMake', label: 'Make' },
-          { key: 'carModel', label: 'Model' },
-          { key: 'carYear', label: 'Year' },
-          { key: 'carMSRP', label: 'MSRP' },
-          { key: 'carMPG', label: 'MPG' },
-          { key: 'carTowingCapacity', label: 'Towing Capacity' },
-          { key: 'carDrivetrain', label: 'Drivetrain' },
-          { key: 'carEngineType', label: 'Engine Type' },
-          { key: 'carFuelType', label: 'Fuel Type' },
-          { key: 'carEngineCylinders', label: 'Engine Cylinders' },
-          { key: 'carType', label: 'Type' },
-          { key: 'carSeatingCapacity', label: 'Seating Capacity' },
-          { key: 'carTransmissionType', label: 'Transmission' }
-        ];
-  
-        attributes.forEach(attr => {
-          const li = document.createElement('li');
-          li.className = 'flex items-start gap-4'; // Use gap-4 for consistent spacing
-  
-          const label = document.createElement('span');
-          label.className = 'font-medium text-gray-700';
-          label.textContent = `${attr.label}: `; // Added space after colon
-  
-          let value = car[attr.key];
-          
-          // Format certain fields except for 'carMSRP'
-          if (attr.key === 'carMPG') {
-            value = `${value} MPG`;
-          } else if (attr.key === 'carTowingCapacity') {
-            value = value > 0 ? `${value.toLocaleString()} lbs` : 'N/A';
-          }
-  
-          // Handle undefined or null values for all attributes
+      /* Style for selected buttons if used here */
+      .option-button.selected {
+          background-color: #1a1a1a; /* Dark background */
+          color: white;               /* White text */
+      }
+
+      /* Optional: Add transition for smooth background and color changes */
+      .option-button {
+          transition: background-color 0.3s, color 0.3s;
+      }
+
+      /* Optional: Change cursor to pointer on hover */
+      .option-button:hover {
+          cursor: pointer;
+          background-color: #333333; /* Slightly lighter dark on hover */
+          color: white;
+      }
+
+      /* Additional styles for favorite button */
+      .favorite-button {
+          transition: color 0.3s;
+      }
+
+      .favorite-button.favorited {
+          color: #f59e0b; /* Tailwind's yellow-500 */
+      }
+  </style>
+</head>
+<body class="bg-white min-h-screen flex flex-col">
+    <div class="w-full relative bg-white">
+        <!-- Responsive navigation -->
+        <nav class="w-full h-auto md:h-20 bg-gradient-to-r from-[#bb4f17] to-black shadow">
+            <div class="container mx-auto px-4 py-2 md:py-0 flex flex-col md:flex-row md:h-full items-center justify-between">
+                <div class="flex flex-col md:flex-row items-center w-full md:w-auto">
+                    <img src="https://via.placeholder.com/189x80" alt="Logo" class="h-16 md:h-20">
+                    <div class="mt-4 md:mt-0 md:ml-12 flex flex-wrap md:flex-nowrap justify-center space-x-4 md:space-x-8">
+                        <a href="nav.html" class="text-white text-[18px] md:text-[22px] font-['Patrick Hand'] hover:text-gray-300">Home</a>
+                        <a href="search.html" class="text-white text-[18px] md:text-[22px] font-['Patrick Hand'] hover:text-gray-300">New Search</a>
+                        <a href="favorites.html" class="text-white text-[18px] md:text-[22px] font-['Patrick Hand'] hover:text-gray-300">Favorites</a>
+                    </div>
+                </div>
+                <button class="mt-4 md:mt-0 bg-[#1a1a1a] text-white text-base px-4 py-3 rounded-lg border-4 border-[#1a1a1a] hover:bg-gray-700 transition-colors duration-300">Sign Out</button>
+            </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="container mx-auto px-4 md:px-8 py-6 md:py-8 mt-4 md:mt-8 flex-1">
+            <h1 class="text-center text-black text-2xl md:text-3xl font-semibold mb-8 md:mb-12">
+                Your Car Recommendations
+            </h1>
+            <div id="recommendations" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full max-w-6xl mx-auto"></div>
+        </main>
+    </div>
+
+    <script>
+      // Helper function to format MSRP values
+      function formatMSRP(value) {
           if (value === undefined || value === null || value === "") {
-            value = 'N/A';
+              return 'N/A';
           }
   
-          const valueSpan = document.createElement('span');
-          valueSpan.className = 'text-gray-800 break-words'; // Removed 'ml-4' and added break-words
-          valueSpan.textContent = value;
+          // If the value is a number, format it with commas and prepend '$'
+          if (typeof value === 'number') {
+              return `$${value.toLocaleString()}`;
+          }
   
-          li.appendChild(label);
-          li.appendChild(valueSpan);
-          detailsList.appendChild(li);
-        });
+          // If the value is a string
+          if (typeof value === 'string') {
+              // Trim any leading/trailing whitespace
+              value = value.trim();
   
-        card.appendChild(detailsList);
-        return card;
+              // Check if it already starts with '$'
+              if (value.startsWith('$')) {
+                  // Optionally, validate the numeric part
+                  const numericPart = value.substring(1).replace(/,/g, '');
+                  if (!isNaN(Number(numericPart))) {
+                      // Reformat to ensure consistent comma placement
+                      return `$${Number(numericPart).toLocaleString()}`;
+                  } else {
+                      // If the numeric part is invalid, return 'N/A'
+                      return 'N/A';
+                  }
+              } else {
+                  // Ensure the rest of the string is a number before adding '$'
+                  const numericValue = Number(value.replace(/[^0-9.]/g, ''));
+                  if (!isNaN(numericValue)) {
+                      return `$${numericValue.toLocaleString()}`;
+                  } else {
+                      // If it's not a valid number, return 'N/A' or handle as needed
+                      return 'N/A';
+                  }
+              }
+          }
+  
+          // For any other data types, return 'N/A'
+          return 'N/A';
       }
   
-      // Check if it's an array
-      if (Array.isArray(recommendationsJSON)) {
-        if (recommendationsJSON.length === 0) {
-          recommendationsDiv.innerHTML = '<p class="text-center text-gray-600">No recommendations available.</p>';
-        } else {
-          recommendationsJSON.forEach((car, index) => {
-            const carCard = createCarCard(car, index);
-            recommendationsDiv.appendChild(carCard);
-          });
-        }
-      } else {
-        recommendationsDiv.innerHTML = '<p class="text-center text-gray-600">No recommendations available.</p>';
+      // Retrieve recommendations from localStorage
+      const recommendationsString = localStorage.getItem('carRecommendations');
+      console.log('Retrieved recommendations string:', recommendationsString);
+  
+      // Display recommendations
+      const recommendationsDiv = document.getElementById('recommendations');
+  
+      try {
+          // Parse the recommendations as JSON
+          const recommendationsJSON = JSON.parse(recommendationsString);
+          console.log('Parsed recommendations JSON:', recommendationsJSON);
+  
+          // Function to create a car card with a favorite star
+          function createCarCard(car, index) {
+              // Create card container
+              const card = document.createElement('div');
+              card.className = 'bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 flex flex-col relative'; // Added 'relative' for positioning
+  
+              // Card Title with star button
+              const titleContainer = document.createElement('div');
+              titleContainer.className = 'flex items-center justify-between mb-4';
+  
+              const title = document.createElement('h2');
+              title.className = 'text-xl font-semibold text-red-600';
+              title.textContent = `Recommendation ${index + 1}`;
+  
+              const favoriteButton = document.createElement('button');
+              favoriteButton.className = 'favorite-button text-gray-400 hover:text-yellow-500 focus:outline-none';
+              favoriteButton.setAttribute('data-car-index', index);
+              favoriteButton.setAttribute('aria-label', 'Add to Favorites');
+  
+              // Star SVG (Outline by default)
+              favoriteButton.innerHTML = `
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" 
+                       viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                          d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.669a1 1 0 
+                             00.95.69h4.915c.969 
+                             0 1.371 1.24.588 
+                             1.81l-3.976 2.888a1 1 0 
+                             00-.364 1.118l1.518 4.669c.3.921-.755 
+                             1.688-1.538 1.118l-3.976-2.888a1 
+                             1 0 00-1.176 0l-3.976 2.888c-.784.57-1.838-.197-1.538-1.118l1.518-4.669a1 
+                             1 0 00-.364-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.915a1 
+                             1 0 00.95-.69l1.518-4.669z" />
+                  </svg>
+              `;
+  
+              // Append title and favorite button to titleContainer
+              titleContainer.appendChild(title);
+              titleContainer.appendChild(favoriteButton);
+  
+              // Append titleContainer to card
+              card.appendChild(titleContainer);
+  
+              // Car Details List
+              const detailsList = document.createElement('ul');
+              detailsList.className = 'space-y-2 flex-1';
+  
+              // Define the order and labels of the car attributes
+              const attributes = [
+                  { key: 'carMake', label: 'Make' },
+                  { key: 'carModel', label: 'Model' },
+                  { key: 'carYear', label: 'Year' },
+                  { key: 'carMSRP', label: 'MSRP' },
+                  { key: 'carMPG', label: 'MPG' },
+                  { key: 'carTowingCapacity', label: 'Towing Capacity' },
+                  { key: 'carDrivetrain', label: 'Drivetrain' },
+                  { key: 'carEngineType', label: 'Engine Type' },
+                  { key: 'carFuelType', label: 'Fuel Type' },
+                  { key: 'carEngineCylinders', label: 'Engine Cylinders' },
+                  { key: 'carType', label: 'Type' },
+                  { key: 'carSeatingCapacity', label: 'Seating Capacity' },
+                  { key: 'carTransmissionType', label: 'Transmission' }
+              ];
+  
+              attributes.forEach(attr => {
+                  const li = document.createElement('li');
+                  li.className = 'flex items-start gap-4'; // Use gap-4 for consistent spacing
+  
+                  const label = document.createElement('span');
+                  label.className = 'font-semibold text-gray-700';
+                  label.textContent = `${attr.label}: `; // Added space after colon
+  
+                  let value = car[attr.key];
+  
+                  // Format certain fields except for 'carMSRP'
+                  if (attr.key === 'carMPG') {
+                      value = `${value}`;
+                  } else if (attr.key === 'carTowingCapacity') {
+                      value = value > 0 ? `${value.toLocaleString()} lbs` : 'N/A';
+                  } else if (attr.key === 'carMSRP') {
+                      value = formatMSRP(value); // Use the helper function
+                  }
+  
+                  // Handle undefined or null values for all attributes
+                  if (value === undefined || value === null || value === "") {
+                      value = 'N/A';
+                  }
+  
+                  const valueSpan = document.createElement('span');
+                  valueSpan.className = 'text-gray-800 break-words';
+                  valueSpan.textContent = value;
+  
+                  li.appendChild(label);
+                  li.appendChild(valueSpan);
+                  detailsList.appendChild(li);
+              });
+  
+              card.appendChild(detailsList);
+              return card;
+          }
+  
+          // Function to handle favorite button clicks
+          function handleFavoriteClick(event) {
+              const button = event.currentTarget;
+              const carIndex = button.getAttribute('data-car-index');
+  
+              // Toggle favorite state
+              const isFavorited = button.classList.toggle('favorited');
+  
+              if (isFavorited) {
+                  // Change to solid star
+                  button.innerHTML = `
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500" fill="currentColor" 
+                           viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 
+                                 4.669a1 1 0 00.95.69h4.915c.969 
+                                 0 1.371 1.24.588 
+                                 1.81l-3.976 2.888a1 1 0 
+                                 00-.364 1.118l1.518 4.669c.3.921-.755 
+                                 1.688-1.538 1.118l-3.976-2.888a1 
+                                 1 0 00-1.176 0l-3.976 2.888c-.784.57-1.838-.197-1.538-1.118l1.518-4.669a1 
+                                 1 0 00-.364-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.915a1 
+                                 1 0 00.95-.69l1.518-4.669z" />
+                      </svg>
+                  `;
+                  // TODO: Send favorite data to the database
+                  console.log(`Car at index ${carIndex} has been favorited.`);
+              } else {
+                  // Change back to outline star
+                  button.innerHTML = `
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" 
+                           viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 
+                                 4.669a1 1 0 00.95.69h4.915c.969 
+                                 0 1.371 1.24.588 
+                                 1.81l-3.976 2.888a1 1 0 
+                                 00-.364 1.118l1.518 4.669c.3.921-.755 
+                                 1.688-1.538 1.118l-3.976-2.888a1 
+                                 1 0 00-1.176 0l-3.976 2.888c-.784.57-1.838-.197-1.538-1.118l1.518-4.669a1 
+                                 1 0 00-.364-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.915a1 
+                                 1 0 00.95-.69l1.518-4.669z" />
+                      </svg>
+                  `;
+                  // TODO: Remove favorite data from the database
+                  console.log(`Car at index ${carIndex} has been unfavorited.`);
+              }
+          }
+  
+          // Check if it's an array
+          if (Array.isArray(recommendationsJSON)) {
+              if (recommendationsJSON.length === 0) {
+                  recommendationsDiv.innerHTML = '<p class="text-center text-gray-600">No recommendations available.</p>';
+              } else {
+                  recommendationsJSON.forEach((car, index) => {
+                      const carCard = createCarCard(car, index);
+                      recommendationsDiv.appendChild(carCard);
+                  });
+  
+                  // After appending all cards, add event listeners to favorite buttons
+                  const favoriteButtons = document.querySelectorAll('.favorite-button');
+                  favoriteButtons.forEach(button => {
+                      button.addEventListener('click', handleFavoriteClick);
+                  });
+              }
+          } else {
+              recommendationsDiv.innerHTML = '<p class="text-center text-gray-600">No recommendations available.</p>';
+          }
+      } catch (err) {
+          console.error('Error parsing recommendations:', err);
+          recommendationsDiv.innerHTML = '<p class="text-center text-red-500">Failed to parse recommendations.</p>';
       }
-    } catch (err) {
-      console.error('Error parsing recommendations:', err);
-      recommendationsDiv.innerHTML = '<p class="text-center text-red-500">Failed to parse recommendations.</p>';
-    }
   </script>
+  
 </body>
 </html>

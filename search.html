@@ -4,43 +4,47 @@
     <meta charset="UTF-8">
     <title>AutoMatch - New Search</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Patrick Hand', cursive;
+            font-family: 'Inter', sans-serif;
         }
-        /* Styles for selected buttons */
-        .selected {
-            background-color: #1a1a1a !important;
-            color: white !important;
+        .roboto-mono {
+            font-family: 'Roboto Mono', monospace;
         }
+
+
     </style>
 </head>
 <body class="bg-white">
     <div class="w-full relative bg-white">
-        <nav class="w-full h-20 bg-gradient-to-r from-[#bb4f17] to-black shadow">
-            <div class="container mx-auto px-4 h-full flex items-center justify-between">
-                <div class="flex items-center">
-                    <img src="https://via.placeholder.com/189x80" alt="Logo" class="h-20">
-                    <div class="ml-12 flex space-x-8">
-                        <a href="nav.html" class="text-[#1b1a17] text-[22px] font-['Patrick Hand']">Home</a>
-                        <a href="#" class="text-[#1b1a17] text-[22px] font-['Patrick Hand']">New Search</a>
-                        <a href="favorites.html" class="text-[#1b1a17] text-[22px] font-['Patrick Hand']">Favorites</a>
+        <!-- Responsive navigation -->
+        <nav class="w-full h-auto md:h-20 bg-gradient-to-r from-[#bb4f17] to-black shadow">
+            <div class="container mx-auto px-4 py-2 md:py-0 flex flex-col md:flex-row md:h-full items-center justify-between">
+                <div class="flex flex-col md:flex-row items-center w-full md:w-auto">
+                    <img src="https://via.placeholder.com/189x80" alt="Logo" class="h-16 md:h-20">
+                    <div class="mt-4 md:mt-0 md:ml-12 flex flex-wrap md:flex-nowrap justify-center space-x-4 md:space-x-8">
+                        <a href="nav.html" class="text-[#1b1a17] text-[18px] md:text-[22px] font-['Patrick Hand']">Home</a>
+                        <a href="#" class="text-[#1b1a17] text-[18px] md:text-[22px] font-['Patrick Hand']">New Search</a>
+                        <a href="favorites.html" class="text-[#1b1a17] text-[18px] md:text-[22px] font-['Patrick Hand']">Favorites</a>
                     </div>
                 </div>
-                <button class="bg-[#1a1a1a] text-white text-base px-4 py-3 rounded-lg border-4 border-[#1a1a1a]">Sign Out</button>
+                <button class="mt-4 md:mt-0 bg-[#1a1a1a] text-white text-base px-4 py-3 rounded-lg border-4 border-[#1a1a1a]">Sign Out</button>
             </div>
         </nav>
-        <!-- Styling and header -->
-        <main class="container mx-auto px-8 py-8 mt-8">
-            <h1 class="text-center text-black text-[22px] mb-8">Please fill out our short questionnaire so our AI can match you to your next car!</h1>
-            <form id="carPreferencesForm" class="max-w-2xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- Main content -->
+        <main class="container mx-auto px-4 md:px-8 py-6 md:py-8 mt-4 md:mt-8">
+            <h1 class="text-center text-black text-[18px] md:text-[22px] mb-8 md:mb-12">
+                Please fill out our short questionnaire so our AI can match you to your next car!
+            </h1>
+            <form id="carPreferencesForm" class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 border-2 border-black rounded-lg p-4 shadow-sm">
                     <!-- Budget -->
-                    <div class="flex flex-col">
-                        <label for="budget" class="text-black text-[22px] mb-2">Budget:</label>
-                        <select id="budget" name="budget[]" multiple class="w-full bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px] h-40 overflow-y-auto">
+                    <div class="flex flex-col space-y-2 md:space-y-4">
+                        <label for="budget" class="text-black text-[18px] md:text-[22px]">Budget:</label>
+                        <select id="budget" name="budget[]" multiple class="w-full bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] h-32 md:h-40 overflow-y-auto">
                             <option value="$5,000 - $10,000">$5,000 - $10,000</option>
                             <option value="$10,000 - $20,000">$10,000 - $20,000</option>
                             <option value="$20,000 - $30,000">$20,000 - $30,000</option>
@@ -51,69 +55,61 @@
                             <option value="$70,000 - $80,000">$70,000 - $80,000</option>
                             <option value="$80,000 - $90,000">$80,000 - $90,000</option>
                             <option value="$90,000 - $100,000">$90,000 - $100,000</option>
-                            <option value="$100,000+">$100,000+</option>                            
+                            <option value="$100,000+">$100,000+</option>
                         </select>
                     </div>
 
-                    <!-- New or Used (No Change) -->
-                    <div class="flex items-center">
-                        <label class="w-1/3 text-black text-[22px]">New or used?</label>
-                        <div class="w-2/3 flex space-x-2">
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="new_used" data-value="New">New</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="new_used" data-value="Used">Used</button>
-                        </div>
-                    </div>
-
                     <!-- Fuel Type -->
-                    <div class="flex items-center">
-                        <label class="w-1/3 text-black text-[22px]">Gas, electric, or hybrid?</label>
-                        <div class="w-2/3 flex space-x-2">
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="fuel_type" data-value="Gas">Gas</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="fuel_type" data-value="Electric">Electric</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="fuel_type" data-value="Hybrid">Hybrid</button>
+                    <div class="flex flex-col space-y-2 md:space-y-4">
+                        <label class="text-black text-[18px] md:text-[22px]">Gas, electric, or hybrid?</label>
+                        <div class="flex flex-wrap gap-2 md:gap-4">
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="fuel_type" data-value="Gas">Gas</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="fuel_type" data-value="Electric">Electric</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="fuel_type" data-value="Hybrid">Hybrid</button>
                         </div>
                     </div>
 
                     <!-- Transmission -->
-                    <div class="flex items-center">
-                        <label class="w-1/3 text-black text-[22px]">Transmission type?</label>
-                        <div class="w-2/3 flex space-x-2">
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="transmission" data-value="Manual">Manual</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="transmission" data-value="Automatic">Automatic</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="transmission" data-value="CVT">CVT</button>
+                    <div class="flex flex-col space-y-2 md:space-y-4">
+                        <label class="text-black text-[18px] md:text-[22px]">Transmission type?</label>
+                        <div class="flex flex-wrap gap-2 md:gap-4">
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="transmission" data-value="Manual">Manual</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="transmission" data-value="Automatic">Automatic</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="transmission" data-value="CVT">CVT</button>
                         </div>
                     </div>
 
-                    <!-- Passengers (No Change) -->
-                    <div class="flex items-center">
-                        <label class="w-1/3 text-black text-[22px]"># of Passengers?</label>
-                        <div class="w-2/3 flex flex-wrap gap-2">
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="passengers" data-value="1">1</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="passengers" data-value="2">2</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="passengers" data-value="3">3</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="passengers" data-value="4">4</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="passengers" data-value="5">5</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="passengers" data-value="6">6</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="passengers" data-value="7">7</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="passengers" data-value="8+">8+</button>
+                    <!-- Passengers -->
+                    <div class="flex flex-col space-y-2 md:space-y-4">
+                        <label class="text-black text-[18px] md:text-[22px]"># of Passengers?</label>
+                        <div class="flex flex-wrap gap-2 md:gap-4">
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="1">1</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="2">2</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="3">3</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="4">4</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="5">5</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="6">6</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="7">7</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="8+">8+</button>
                         </div>
                     </div>
 
                     <!-- Drivetrain -->
-                    <div class="flex items-center">
-                        <label class="w-1/3 text-black text-[22px]">AWD, 4WD, FWD, or RWD?</label>
-                        <div class="w-2/3 flex space-x-2">
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="drivetrain" data-value="AWD">AWD</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="drivetrain" data-value="4WD">4WD</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="drivetrain" data-value="FWD">FWD</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="drivetrain" data-value="RWD">RWD</button>
+                    <div class="flex flex-col space-y-2 md:space-y-4">
+                        <label class="text-black text-[18px] md:text-[22px]">AWD, 4WD, FWD, or RWD?</label>
+                        <div class="flex flex-wrap gap-2 md:gap-4">
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="AWD">AWD</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="4WD">4WD</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="FWD">FWD</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="RWD">RWD</button>
                         </div>
                     </div>
 
                     <!-- Body Style -->
-                    <div class="flex flex-col">
-                        <label for="body_style" class="text-black text-[22px] mb-2">Body Style?</label>
-                        <select id="body_style" name="body_style[]" multiple class="w-full bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px] h-40 overflow-y-auto">
+                    <div class="flex flex-col space-y-2 md:space-y-4">
+                        <label for="body_style" class="text-black text-[18px] md:text-[22px]">Body Style?</label>
+                        <select id="body_style" name="body_style[]" multiple class="w-full bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] h-32 md:h-40 overflow-y-auto">
+                            <option value="No Preference">Any/No Preference</option>
                             <option value="Sedan">Sedan</option>
                             <option value="SUV">SUV</option>
                             <option value="Truck">Truck</option>
@@ -121,38 +117,30 @@
                             <option value="Van">Van</option>
                             <option value="Convertible">Convertible</option>
                             <option value="Hatchback">Hatchback</option>
-                            <option value="Wagon">Wagon</option>
-                            <option value="Crossover">Crossover</option>
+                            <option value="Crossover">Sportscar</option>
                             <option value="Minivan">Minivan</option>
-                            <option value="Roadster">Roadster</option>
-                            <option value="Pickup">Pickup</option>
-                            <option value="Sportback">Sportback</option>
-                            <option value="Liftback">Liftback</option>
-                            <option value="Cabriolet">Cabriolet</option>
-                            <option value="Supercar">Supercar</option>
-                            <option value="Microcar">Microcar</option>
-                            <option value="Off-Road Vehicle">Off-Road Vehicle</option>                            
+                            <option value="Off-Road Vehicle">Off-Road Vehicle</option>
                         </select>
                     </div>
 
                     <!-- MPG Preference -->
-                    <div class="flex items-center">
-                        <label class="w-1/3 text-black text-[22px]">MPG Preference?</label>
-                        <div class="w-2/3 flex space-x-2">
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="mpg" data-value=">10">>10</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="mpg" data-value="10-20">10-20</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="mpg" data-value="20-30">20-30</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="mpg" data-value="30-40">30-40</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="mpg" data-value="40-50">40-50</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px]" data-field="mpg" data-value="<50"><50</button>                            
+                    <div class="flex flex-col space-y-2 md:space-y-4">
+                        <label class="text-black text-[18px] md:text-[22px]">MPG Preference?</label>
+                        <div class="flex flex-wrap gap-2 md:gap-4">
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value=">10">>10</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value="10-20">10-20</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value="20-30">20-30</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value="30-40">30-40</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value="40-50">40-50</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value="<50">&lt;50</button>                            
                         </div>
                     </div>
 
                     <!-- Make Preference -->
-                    <div class="flex flex-col">
-                        <label for="make_preference" class="text-black text-[22px] mb-2">Make Preference?</label>
-                        <select id="make_preference" name="make_preference[]" multiple class="w-full bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[18px] h-40 overflow-y-auto">
-                            <option value="Acura">Any/No Preference</option>
+                    <div class="flex flex-col space-y-2 md:space-y-4">
+                        <label for="make_preference" class="text-black text-[18px] md:text-[22px]">Make Preference?</label>
+                        <select id="make_preference" name="make_preference[]" multiple class="w-full bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] h-40 overflow-y-auto">
+                            <option value="No Preference">Any/No Preference</option>
                             <option value="Acura">Acura</option>
                             <option value="Alfa Romeo">Alfa Romeo</option>
                             <option value="Aston Martin">Aston Martin</option>
@@ -220,12 +208,11 @@
                         </svg>
                         Find your AutoMatch!
                     </button>
-                    
                 </div>
 
                 <div class="loader hidden">
                     <svg class="car" width="102" height="40" xmlns="http://www.w3.org/2000/svg">
-                        <g transform="translate(2 1)" stroke="#002742" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                        <g transform="translate(2 1)" stroke="#000000" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
                             <path class="car__body" d="M47.293 2.375C52.927.792 54.017.805 54.017.805c2.613-.445 6.838-.337 9.42.237l8.381 1.863c2.59.576 6.164 2.606 7.98 4.531l6.348 6.732 6.245 1.877c3.098.508 5.609 3.431 5.609 6.507v4.206c0 .29-2.536 4.189-5.687 4.189H36.808c-2.655 0-4.34-2.1-3.688-4.67 0 0 3.71-19.944 14.173-23.902zM36.5 15.5h54.01" stroke-width="3"/>
                             <ellipse class="car__wheel--left" stroke-width="3.2" fill="#FFF" cx="83.493" cy="30.25" rx="6.922" ry="6.808"/>
                             <ellipse class="car__wheel--right" stroke-width="3.2" fill="#FFF" cx="46.511" cy="30.25" rx="6.922" ry="6.808"/>
@@ -234,113 +221,133 @@
                             <path class="car__line car__line--bottom" d="M25.5 9.5h-19" stroke-width="3"/>
                         </g>
                     </svg>
-                    
-                        
-                    </div>
-                    </div>
+                
+                    <div class="mx-8 flex justify-center">
+                        Please be paitent while our AI finds the best results...
+                    </div>  
+                </div>            
             </form>
         </main>
     </div>
 
     <script type="module">
-        // Object to store user selected options (arrays for multiple selections)
-        const selectedOptions = {};
-
-        // Initialize selectedOptions for each field to be multiple
-        const multiSelectFields = ['fuel_type', 'transmission', 'drivetrain', 'mpg', 'new_used', 'passengers'];
-        multiSelectFields.forEach(field => {
-            selectedOptions[field] = [];
-        });
-
-        // Event listeners for the option buttons
-        document.querySelectorAll('.option-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const field = button.getAttribute('data-field');
-                const value = button.getAttribute('data-value');
-
-                // Check if the value is already selected
-                const index = selectedOptions[field].indexOf(value);
-                if (index > -1) {
-                    // If selected, remove it
-                    selectedOptions[field].splice(index, 1);
-                    button.classList.remove('selected');
-                } else {
-                    // If not selected, add it
-                    selectedOptions[field].push(value);
-                    button.classList.add('selected');
-                }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Object to store user selected options (arrays for multiple selections)
+            const selectedOptions = {};
+    
+            // Initialize selectedOptions for each field to be multiple
+            const multiSelectFields = ['fuel_type', 'transmission', 'drivetrain', 'mpg', 'new_used', 'passengers'];
+            multiSelectFields.forEach(field => {
+                selectedOptions[field] = [];
             });
-        });
-
-        // Handle form submission
-        document.getElementById('match').addEventListener('click', function(event) {
-            event.preventDefault();
-
-            const formData = new FormData(document.getElementById('carPreferencesForm'));
-            const userPreferences = {};
-
-            const loader = document.querySelector('.loader');
-            loader.classList.remove('hidden');
-
-
-            // Collect data from multi-select fields
-            const budget = formData.getAll('budget[]');
-            const bodyStyle = formData.getAll('body_style[]');
-            const makePreference = formData.getAll('make_preference[]');
-
-            if (budget.length > 0) {
-                userPreferences.budget = budget;
-            }
-
-            if (bodyStyle.length > 0) {
-                userPreferences.body_style = bodyStyle;
-            }
-
-            if (makePreference.length > 0) {
-                userPreferences.make_preference = makePreference;
-            }
-
-            // Add selected options from button-based fields
-            for (const field in selectedOptions) {
-                if (selectedOptions[field].length > 0) {
-                    userPreferences[field] = selectedOptions[field];
-                }
-            }
-
-            // Send data to backend
-            fetch('http://localhost:3000/api/getCarRecommendations', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userPreferences),
-            })
-            .then((response) => {
-                if (!response.ok) {
-                    return response.json().then((err) => {
-                        throw new Error(err.error || 'Unknown error');
+    
+            // Event listeners for the option buttons
+            document.querySelectorAll('.option-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const field = button.getAttribute('data-field');
+                    const value = button.getAttribute('data-value');
+    
+                    // Check if the value is already selected
+                    const index = selectedOptions[field].indexOf(value);
+                    if (index > -1) {
+                        // If selected, remove it
+                        selectedOptions[field].splice(index, 1);
+                        button.classList.remove('selected');
+                    } else {
+                        // If not selected, add it
+                        selectedOptions[field].push(value);
+                        button.classList.add('selected');
+                    }
+                });
+            });
+    
+            // Handle form submission
+            document.getElementById('match').addEventListener('click', function(event) {
+                event.preventDefault();
+    
+                console.log('Find your AutoMatch! button clicked.');
+    
+                const loader = document.querySelector('.loader');
+                loader.classList.remove('hidden');
+    
+                // Debugging: Confirm loader is now visible
+                console.log('Loader is now visible:', !loader.classList.contains('hidden'));
+    
+                // Use requestAnimationFrame to ensure DOM updates before scrolling
+                requestAnimationFrame(() => {
+                    loader.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'end'
                     });
-                }
-                return response.json();
-            })
-            .then((data) => {
-                console.log('Data received from backend:', data);
 
-                // Stringify recommendations 
-                const recommendationsString = JSON.stringify(data.recommendations);
-                console.log('Stringified recommendations:', recommendationsString);
-
-                // Store the recommendations for display on match.html
-                localStorage.setItem('carRecommendations', recommendationsString);
-
-                // Redirect to match.html 
-                window.location.href = 'match.html';
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('An error occurred while generating recommendations. Please try again later.');
+                    setTimeout(() => {
+                        const formData = new FormData(document.getElementById('carPreferencesForm'));
+                        const userPreferences = {};
+    
+                        // Collect data from multi-select fields
+                        const budget = formData.getAll('budget[]');
+                        const bodyStyle = formData.getAll('body_style[]');
+                        const makePreference = formData.getAll('make_preference[]');
+    
+                        if (budget.length > 0) {
+                            userPreferences.budget = budget;
+                        }
+    
+                        if (bodyStyle.length > 0) {
+                            userPreferences.body_style = bodyStyle;
+                        }
+    
+                        if (makePreference.length > 0) {
+                            userPreferences.make_preference = makePreference;
+                        }
+    
+                        // Add selected options from button-based fields
+                        for (const field in selectedOptions) {
+                            if (selectedOptions[field].length > 0) {
+                                userPreferences[field] = selectedOptions[field];
+                            }
+                        }
+    
+                        console.log('User Preferences:', userPreferences);
+    
+                        // Send data to backend
+                        fetch('http://localhost:3000/api/getCarRecommendations', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(userPreferences),
+                        })
+                        .then((response) => {
+                            if (!response.ok) {
+                                return response.json().then((err) => {
+                                    throw new Error(err.error || 'Unknown error');
+                                });
+                            }
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log('Data received from backend:', data);
+    
+                            // Stringify recommendations 
+                            const recommendationsString = JSON.stringify(data.recommendations);
+                            console.log('Stringified recommendations:', recommendationsString);
+    
+                            // Store the recommendations for display on match.html
+                            localStorage.setItem('carRecommendations', recommendationsString);
+    
+                            // Redirect to match.html 
+                            window.location.href = 'match.html';
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                            alert('An error occurred while generating recommendations. Please try again later.');
+                        });
+                    }, 500); // 500 milliseconds delay to allow scroll animation
+                });
             });
         });
     </script>
+    
 </body>
 </html>
