@@ -28,6 +28,8 @@ Here is the data they have provided about their preferences in JSON format:
 You response data should be formatted EXACTLY in the following manner. DO NOT includeanything other than data formatted in this way. Please put your responses in the
 relevant quotations ("") in the JSON data. Remember, your response should ALWAYS match this exact format and should be your top 3 recommendations based on the end user's
 given preferences. It is VITAL that it matches this exact format because this data will be going straight into a SQL insert statement and put into a database.
+
+Please do your best to ensure ALL PROVIDED DATA is accurate. End users will be making purchase decisions based on this information, so it should be true to the absolute BEST of your knowledge.
 [
     {
     "carMake": "",
@@ -77,6 +79,21 @@ given preferences. It is VITAL that it matches this exact format because this da
 ]
 
   ENSURE THAT THE ONLY THING YOU ARE RETURNING IS VALID JSON DATA MATCHING THIS PROMPT. THERE SHOULD BE NO OTHER TEXT OR DATA. 
+
+  The JSON data should contain the corresponding info. I will provide some examples as well. 
+  carMake: Make of the car
+  carModel: Model of the car
+  carYear: Year of the car
+  carMSRP: MSRP of the car. PLEASE MAKE SURE THIS IS CORRECT!!!
+  carMPG: MPG of the car.
+  carTowingCapacity: Towing capacity of the car (if applicable). If the car does not have a towing capacity, it is acceptable to return a value of N/A
+  carDrivetrain: Drivetrain of the car. (ex: Front Wheel Drive, Rear Wheel Drive, All Wheel Drive, Four Wheel Drive)
+  carEngineType: Type of engine. (ex: 4-cylinder, V6, V8)
+  carFuelType: Fuel type of car. (ex: Unleaded, Diesel, Electric)
+  carEngineCylinders: Number of engine cylinders. This should be based off of the engine type. For example, a 4-cylinder should ALWAYS have a value of 4, V6 ALWAYS has a value of 6, V8 ALWAYS has a value of 8, etc. Please make sure this is accurate!!
+  carType: Body type of the car (ex: Sedan, SUV, etc.)
+  carSeatingCapacity: Seating capacity of the car. 
+  carTransmissionType: Transmission type of the car (ex: automatic, manual, CVT). 
   `;
 }
 
