@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        .bg-image-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+        .bg-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @keyframes bounce-scale {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+        .arrow-bounce:hover {
+            animation: bounce-scale 0.8s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen">
+    <!-- Background image container -->
+    <div class="bg-image-container">
+        <img src="bg.png" alt="Background" />
+    </div>
+
+    <!-- Content container -->
+    <div class="relative flex flex-col items-center justify-center min-h-screen px-4">
+        <!-- Logo - Increased sizes significantly -->
+        <div class="mb-8 md:mb-12 w-full max-w-[90%] md:max-w-[80%] lg:max-w-[70%] flex justify-center">
+            <img src="logo.png" alt="AutoMatch Logo" class="w-96 md:w-[600px] lg:w-[800px] h-auto">
+        </div>
+
+        <!-- Text content -->
+        <div class="text-center text-[#1b1a17] text-xl md:text-2xl lg:text-[32px] leading-normal md:leading-relaxed mb-8">
+            Let us help you find your dream car<br class="hidden md:block">using the power of AI!
+        </div>
+
+        <!-- Arrow Button - Larger and animated -->
+        <a href="login.html" 
+           class="arrow-bounce flex justify-center items-center w-20 h-20 md:w-28 md:h-28 transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                 class="w-16 h-16 md:w-24 md:h-24 text-black" 
+                 viewBox="0 0 24 24" 
+                 fill="currentColor">
+                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+            </svg>
+        </a>
+    </div>
+</body>
+</html>
