@@ -48,6 +48,7 @@
   
     <div class="w-full relative bg-white">
       <div id="navbar-placeholder"></div>
+      <script src="navbar.js"></script>
 
 
         <!-- Main content -->
@@ -290,11 +291,14 @@
       }
 
       fetch('navbar.html')
-    .then(response => response.text())
-    .then(data => {
-      document.getElementById('navbar-placeholder').innerHTML = data;
-    })
-    .catch(error => console.error('Error loading navbar:', error));
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('navbar-placeholder').innerHTML = html;
+        // Initialize the mobile menu
+        initMobileMenu();
+      });
+
+
   </script>
   
   <div class="mx-8 flex justify-center">
