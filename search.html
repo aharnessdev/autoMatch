@@ -13,14 +13,55 @@
         .roboto-mono {
             font-family: 'Roboto Mono', monospace;
         }
-
-
+        /* Custom slider styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 2px;
+            background: #1a1a1a;
+            border-radius: 5px;
+            outline: none;
+            margin: 1rem 0;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 2px solid #1a1a1a;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: white;
+            border: 2px solid #1a1a1a;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .slider-value {
+            background: white;
+            border: 2px solid #1a1a1a;
+            padding: 4px 12px;
+            border-radius: 8px;
+            min-width: 60px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .option-container {
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
     </style>
 </head>
 <body class="bg-white">
     <div class="w-full relative bg-white">
         <!-- Responsive navigation -->
-<div id="navbar-placeholder"></div>
+        <div id="navbar-placeholder"></div>
 
         <!-- Main content -->
         <main class="container mx-auto px-4 md:px-8 py-6 md:py-8 mt-4 md:mt-8">
@@ -30,8 +71,8 @@
             <form id="carPreferencesForm" class="max-w-4xl mx-auto">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 border-2 border-black rounded-lg p-4 shadow-sm">
                     <!-- Budget -->
-                    <div class="flex flex-col space-y-2 md:space-y-4">
-                        <label for="budget" class="text-black text-[18px] md:text-[22px]">Budget:</label>
+                    <div class="option-container">
+                        <label for="budget" class="text-black text-[18px] md:text-[22px] mb-4">Budget:</label>
                         <select id="budget" name="budget[]" multiple class="w-full bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] h-32 md:h-40 overflow-y-auto">
                             <option value="$5,000 - $10,000">$5,000 - $10,000</option>
                             <option value="$10,000 - $20,000">$10,000 - $20,000</option>
@@ -48,9 +89,9 @@
                     </div>
 
                     <!-- Fuel Type -->
-                    <div class="flex flex-col space-y-2 md:space-y-4">
-                        <label class="text-black text-[18px] md:text-[22px]">Gas, electric, or hybrid?</label>
-                        <div class="flex flex-wrap gap-2 md:gap-4">
+                    <div class="option-container">
+                        <label class="text-black text-[18px] md:text-[22px] mb-4">Gas, electric, or hybrid?</label>
+                        <div class="flex flex-wrap gap-2 md:gap-4 justify-center">
                             <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="fuel_type" data-value="Gas">Gas</button>
                             <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="fuel_type" data-value="Electric">Electric</button>
                             <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="fuel_type" data-value="Hybrid">Hybrid</button>
@@ -58,44 +99,42 @@
                     </div>
 
                     <!-- Transmission -->
-                    <div class="flex flex-col space-y-2 md:space-y-4">
-                        <label class="text-black text-[18px] md:text-[22px]">Transmission type?</label>
-                        <div class="flex flex-wrap gap-2 md:gap-4">
+                    <div class="option-container">
+                        <label class="text-black text-[18px] md:text-[22px] mb-4">Transmission type?</label>
+                        <div class="flex flex-wrap gap-2 md:gap-4 justify-center">
                             <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="transmission" data-value="Manual">Manual</button>
                             <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="transmission" data-value="Automatic">Automatic</button>
                             <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="transmission" data-value="CVT">CVT</button>
                         </div>
                     </div>
 
-                    <!-- Passengers -->
-                    <div class="flex flex-col space-y-2 md:space-y-4">
-                        <label class="text-black text-[18px] md:text-[22px]"># of Passengers?</label>
-                        <div class="flex flex-wrap gap-2 md:gap-4">
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="1">1</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="2">2</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="3">3</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="4">4</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="5">5</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="6">6</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="7">7</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] w-10 md:w-12" data-field="passengers" data-value="8+">8+</button>
+                    <!-- Passengers Slider -->
+                    <div class="option-container">
+                        <label class="text-black text-[18px] md:text-[22px] mb-4"># of Passengers?</label>
+                        <div class="flex flex-col space-y-4">
+                            <input type="range" id="passengers-slider" min="1" max="8" value="4" class="w-full" data-field="passengers">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[14px] text-gray-600">1</span>
+                                <span id="passengers-value" class="slider-value text-[16px] md:text-[18px]">4</span>
+                                <span class="text-[14px] text-gray-600">8+</span>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Drivetrain -->
-                    <div class="flex flex-col space-y-2 md:space-y-4">
-                        <label class="text-black text-[18px] md:text-[22px]">AWD, 4WD, FWD, or RWD?</label>
-                        <div class="flex flex-wrap gap-2 md:gap-4">
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="AWD">AWD</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="4WD">4WD</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="FWD">FWD</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="RWD">RWD</button>
+                    <div class="option-container">
+                        <label class="text-black text-[18px] md:text-[22px] mb-4">AWD, 4WD, FWD, or RWD?</label>
+                        <div class="flex flex-nowrap gap-2 justify-center">
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="AWD">AWD</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="4WD">4WD</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="FWD">FWD</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-3 py-2 text-[16px] md:text-[18px]" data-field="drivetrain" data-value="RWD">RWD</button>
                         </div>
                     </div>
 
                     <!-- Body Style -->
-                    <div class="flex flex-col space-y-2 md:space-y-4">
-                        <label for="body_style" class="text-black text-[18px] md:text-[22px]">Body Style?</label>
+                    <div class="option-container">
+                        <label for="body_style" class="text-black text-[18px] md:text-[22px] mb-4">Body Style?</label>
                         <select id="body_style" name="body_style[]" multiple class="w-full bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] h-32 md:h-40 overflow-y-auto">
                             <option value="No Preference">Any/No Preference</option>
                             <option value="Sedan">Sedan</option>
@@ -111,23 +150,23 @@
                         </select>
                     </div>
 
-                    <!-- MPG Preference -->
-                    <div class="flex flex-col space-y-2 md:space-y-4">
-                        <label class="text-black text-[18px] md:text-[22px]">MPG Preference?</label>
-                        <div class="flex flex-wrap gap-2 md:gap-4">
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value="<10">&lt;10</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value="10-20">10-20</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value="20-30">20-30</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value="30-40">30-40</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value="40-50">40-50</button>
-                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 py-2 text-[16px] md:text-[18px]" data-field="mpg" data-value=">50">>50</button>                            
+                    <!-- MPG Preference Slider -->
+                    <div class="option-container">
+                        <label class="text-black text-[18px] md:text-[22px] mb-4">MPG Preference?</label>
+                        <div class="flex flex-col space-y-4">
+                            <input type="range" id="mpg-slider" min="0" max="50" value="25" class="w-full" data-field="mpg">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[14px] text-gray-600">N/A</span>
+                                <span id="mpg-value" class="slider-value text-[16px] md:text-[18px]">25</span>
+                                <span class="text-[14px] text-gray-600">50+</span>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Make Preference -->
-                    <div class="flex flex-col space-y-2 md:space-y-4">
-                        <label for="make_preference" class="text-black text-[18px] md:text-[22px]">Make Preference?</label>
-                        <select id="make_preference" name="make_preference[]" multiple class="w-full bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] h-40 overflow-y-auto">
+                    <div class="option-container">
+                        <label for="make_preference" class="text-black text-[18px] md:text-[22px] mb-4">Make Preference?</label>
+                        <select id="make_preference" name="make_preference[]" multiple class="w-full bg-white border-2 border-[#1a1a1a] rounded-lg px-3 md:px-4 py-2 text-[16px] md:text-[18px] h-32 md:h-40 overflow-y-auto">
                             <option value="No Preference">Any/No Preference</option>
                             <option value="Acura">Acura</option>
                             <option value="Alfa Romeo">Alfa Romeo</option>
@@ -224,9 +263,32 @@
             const selectedOptions = {};
     
             // Initialize selectedOptions for each field to be multiple
-            const multiSelectFields = ['fuel_type', 'transmission', 'drivetrain', 'mpg', 'new_used', 'passengers'];
+            const multiSelectFields = ['fuel_type', 'transmission', 'drivetrain'];
             multiSelectFields.forEach(field => {
                 selectedOptions[field] = [];
+            });
+
+            // Handle sliders
+            const passengersSlider = document.getElementById('passengers-slider');
+            const passengersValue = document.getElementById('passengers-value');
+            const mpgSlider = document.getElementById('mpg-slider');
+            const mpgValue = document.getElementById('mpg-value');
+
+            passengersSlider.addEventListener('input', () => {
+                const value = passengersSlider.value;
+                passengersValue.textContent = value === "8" ? "8+" : value;
+                selectedOptions.passengers = [value === "8" ? "8+" : value];
+            });
+
+            mpgSlider.addEventListener('input', () => {
+                const value = mpgSlider.value;
+                if (value === "0") {
+                    mpgValue.textContent = "N/A";
+                    selectedOptions.mpg = ["N/A"];
+                } else {
+                    mpgValue.textContent = value === "50" ? "50+" : value;
+                    selectedOptions.mpg = [value === "50" ? ">50" : value];
+                }
             });
     
             // Event listeners for the option buttons
@@ -289,7 +351,7 @@
                             userPreferences.make_preference = makePreference;
                         }
     
-                        // Add selected options from button-based fields
+                        // Add selected options from button-based fields and sliders
                         for (const field in selectedOptions) {
                             if (selectedOptions[field].length > 0) {
                                 userPreferences[field] = selectedOptions[field];
