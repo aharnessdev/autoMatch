@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Responsive Navbar</title>
   
-  <!--navbar-->
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- CSS for Slide-in Effect -->
@@ -25,9 +24,11 @@
   <nav class="h-16 flex relative">
     <!-- Left Half -->
     <div class="w-1/2 flex items-center p-2">
-      <div class="w-20 h-14  flex items-center justify-center">
-        <!-- Placeholder for logo -->
-        <img src="logo.png" alt="Logo" class="object-cover w-full h-full">
+      <div class="w-20 h-14 flex items-center justify-center">
+        <!-- Logo wrapped in a link to search.html -->
+        <a href="search.html">
+          <img src="logo.png" alt="Logo" class="object-cover w-full h-full">
+        </a>
       </div>
       <div class="hidden md:flex space-x-4 ml-4">
         <a href="nav.html" class="text-black hover:text-gray-600 text-sm">Home</a>
@@ -48,7 +49,10 @@
       <div class="flex-1 h-full bg-gradient-to-r from-[#F8A940] to-red-600 flex items-center justify-end pr-4">
         <!-- Sign Out Button -->
         <div class="hidden md:block">
-          <button class="bg-black text-white px-3 py-1 rounded text-sm">Sign Out</button>
+          <!-- Sign Out button wrapped in a link to index.html -->
+          <a href="index.html">
+            <button class="bg-black text-white px-3 py-1 rounded text-sm">Sign Out</button>
+          </a>
         </div>
         <!-- Mobile Menu Button -->
         <div class="md:hidden ml-2">
@@ -78,9 +82,9 @@
       <a href="search.html" class="text-black hover:text-gray-600 mb-4 block text-base">New Search</a>
       <a href="favorites.html" class="text-black hover:text-gray-600 mb-4 block text-base">Favorites</a>
       <!-- Sign Out Button -->
-       <a href="index.html">
-      <button class="bg-black text-white px-4 py-2 rounded mt-4 text-base">Sign Out</button>
-    </a>
+      <a href="index.html">
+        <button class="bg-black text-white px-4 py-2 rounded mt-4 text-base">Sign Out</button>
+      </a>
     </nav>
   </div>
   <!-- JavaScript for Mobile Menu Toggle -->
