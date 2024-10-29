@@ -26,9 +26,9 @@
 <body class="bg-white min-h-screen flex flex-col">
   
     <div class="w-full relative bg-white">
-      <div id="navbar-placeholder"></div>
-      <script src="navbar.js"></script>
-    </div>
+        <div id="navbar-placeholder" class="sticky top-0 z-50"></div>
+        <script src="navbar.js"></script>
+    
 
     <div class="bg-white min-h-screen flex items-center justify-center">
         <div class="w-full max-w-[1440px] h-[1024px] relative bg-white p-4">
@@ -62,11 +62,12 @@
             </div>
         </div>
     </div>
+</div>
 
     <script>
-        fetch('navbar.html')
-        .then(response => response.text())
-        .then(html => {
+      fetch('navbar.html')
+      .then(response => response.text())
+      .then(html => {
         document.getElementById('navbar-placeholder').innerHTML = html;
         // Initialize the mobile menu
         initMobileMenu();

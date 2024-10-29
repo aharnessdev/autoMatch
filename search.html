@@ -62,7 +62,7 @@
 <body class="bg-white">
     <div class="w-full relative bg-white">
         <!-- Responsive navigation -->
-        <div id="navbar-placeholder"></div>
+        <div id="navbar-placeholder" class="sticky top-0 z-50"></div>
         <script src="navbar.js"></script>
 
         <!-- Main content -->
@@ -228,6 +228,16 @@
                             <option value="Volvo">Volvo</option>                            
                         </select>
                     </div>
+
+                    <!-- Condition -->
+                    <div class="option-container">
+                        <label class="text-black text-[18px] md:text-[22px] mb-4">New or used?</label>
+                        <div class="flex flex-wrap gap-2 md:gap-4 justify-center">
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="condition" data-value="New">New</button>
+                            <button type="button" class="option-button bg-white border-2 border-[#1a1a1a] rounded-lg px-4 md:px-6 py-2 text-[16px] md:text-[18px]" data-field="condition" data-value="Used">Used</button>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- Submit button and styling -->
                 <div class="mt-8 flex justify-center">
@@ -265,7 +275,7 @@
             const selectedOptions = {};
     
             // Initialize selectedOptions for each field to be multiple
-            const multiSelectFields = ['fuel_type', 'transmission', 'drivetrain'];
+            const multiSelectFields = ['fuel_type', 'transmission', 'drivetrain', 'condition'];
             multiSelectFields.forEach(field => {
                 selectedOptions[field] = [];
             });
